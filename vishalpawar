@@ -1,1 +1,486 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Vishal P. Pawar - Area Manager </title>
+<link rel="icon" href="assets/logo/fav.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#0268b3;
+  --teal:#03CBA6;
+  --blue-mid:#0474ca;
+  --teal-dark:#02a889;
+  --white:#ffffff;
+  --text-dark:#0f172a;
+  --text-mid:#475569;
+  --text-soft:#64748b;
+  --border:#e2e8f0;
+  --bg:#f0f7ff;
+  --card-bg:#ffffff;
+}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{
+  width:100%;min-height:100vh;
+  background:linear-gradient(145deg, var(--blue) 0%, #0575cb 35%, #04a8c0 65%, var(--teal) 100%);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{
+  max-width:440px;
+  margin:0 auto;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  padding:0 0 40px;
+  position:relative;
+}
+
+/* ── DECORATIVE BG ELEMENTS ── */
+.bg-decor{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.bg-circle-1{
+  position:absolute;
+  top:-120px;right:-80px;
+  width:340px;height:340px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);
+}
+.bg-circle-2{
+  position:absolute;
+  bottom:10%;left:-100px;
+  width:280px;height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(3,203,166,0.2) 0%, transparent 65%);
+}
+.bg-circle-3{
+  position:absolute;
+  top:40%;right:-60px;
+  width:200px;height:200px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%);
+}
+.bg-grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+/* Floating dots */
+.bg-dots{
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(circle, rgba(255,255,255,0.15) 1.5px, transparent 1.5px);
+  background-size:28px 28px;
+  opacity:0.4;
+}
+
+/* ── HEADER ── */
+.header{
+  position:relative;
+  z-index:2;
+  padding:28px 20px 16px;
+  text-align:center;
+}
+.logo-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:10px;
+}
+.logo-box{
+  background:rgba(255,255,255,0.95);
+  border-radius:16px;
+
+  box-shadow:0 8px 32px rgba(2,104,179,0.25), 0 2px 8px rgba(0,0,0,0.1);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-box img{
+  height:75px;
+  object-fit:contain;
+  display:block;
+}
+.header-tagline{
+  font-size:0.65rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.7);
+  font-weight:500;
+  margin-top:8px;
+}
+
+/* ── AVATAR ── */
+.avatar-wrap{
+  position:relative;
+  z-index:5;
+  display:flex;
+  justify-content:center;
+  margin-top:6px;
+  margin-bottom:-52px;
+}
+.avatar-ring{
+  width:112px;height:112px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--blue), var(--teal));
+  padding:3px;
+  box-shadow:0 8px 28px rgba(2,104,179,0.4);
+}
+.avatar{
+  width:100%;height:100%;
+  border-radius:50%;
+  border:3px solid var(--white);
+  overflow:hidden;
+  background:#e2e8f0;
+}
+.avatar img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+/* ── MAIN CARD ── */
+.card{
+  position:relative;
+  z-index:4;
+  background:var(--card-bg);
+  margin:0 12px;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(2,104,179,0.2), 0 4px 16px rgba(0,0,0,0.08);
+  padding-top:68px;
+}
+
+/* Name + title */
+.profile-head{
+  text-align:center;
+  padding:6px 20px 20px;
+  border-bottom:1px solid var(--border);
+}
+.profile-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.55rem;
+  font-weight:600;
+  color:var(--text-dark);
+  margin-bottom:8px;
+  letter-spacing:-0.01em;
+}
+.profile-badge{
+  display:inline-block;
+  background:linear-gradient(135deg, rgba(2,104,179,0.1), rgba(3,203,166,0.1));
+  border:1px solid rgba(2,104,179,0.2);
+  color:var(--blue);
+  font-size:0.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.09em;
+  padding:5px 14px;
+  border-radius:20px;
+  line-height:1.5;
+}
+
+/* Action buttons */
+.btn-row{
+  display:flex;gap:10px;
+  padding:18px 16px 0;
+}
+.btn-save{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:13px 10px;
+  background:linear-gradient(135deg, var(--blue), var(--blue-mid));
+  color:#fff;
+  border:none;border-radius:12px;
+  font-family:'Inter',sans-serif;font-size:0.84rem;font-weight:600;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 4px 14px rgba(2,104,179,0.35);
+  transition:all .18s;
+  white-space:nowrap;
+}
+.btn-save:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(2,104,179,0.45);}
+.btn-call{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:13px 10px;
+  background:linear-gradient(135deg, var(--teal-dark), var(--teal));
+  color:#fff;
+  border:none;border-radius:12px;
+  font-family:'Inter',sans-serif;font-size:0.84rem;font-weight:600;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 4px 14px rgba(3,203,166,0.35);
+  transition:all .18s;
+  white-space:nowrap;
+}
+.btn-call:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(3,203,166,0.45);}
+
+/* ── INFO LIST ── */
+.info-list{margin-top:20px;}
+.list-section-title{
+  font-size:0.68rem;font-weight:700;
+  color:var(--blue);
+  padding:10px 18px 8px;
+  background:linear-gradient(90deg, rgba(2,104,179,0.05), rgba(3,203,166,0.03));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  display:flex;align-items:center;gap:8px;
+}
+.list-section-title::before{
+  content:'';
+  display:inline-block;
+  width:3px;height:12px;
+  background:linear-gradient(var(--blue), var(--teal));
+  border-radius:2px;
+  flex-shrink:0;
+}
+.list-section-title:first-child{border-top:none;}
+
+.list-row{
+  display:flex;align-items:flex-start;
+  padding:12px 18px;
+  border-bottom:1px solid var(--border);
+  gap:8px;
+  transition:background .12s;
+}
+.list-row:hover{background:#f8fbff;}
+.list-row:last-child{border-bottom:none;}
+.list-label{
+  min-width:106px;
+  font-size:0.75rem;font-weight:600;
+  color:var(--text-soft);
+  flex-shrink:0;padding-top:1px;
+  letter-spacing:0.01em;
+}
+.list-value{
+  flex:1;
+  font-size:0.84rem;color:var(--text-dark);
+  font-weight:500;line-height:1.5;
+  word-break:break-word;
+}
+.list-value a{color:var(--blue);text-decoration:none;font-weight:600;}
+.list-value a:hover{text-decoration:underline;}
+
+/* Location block */
+.loc-block{
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+}
+.loc-address{
+  font-size:0.83rem;
+  color:var(--text-mid);
+  font-weight:400;
+  line-height:1.75;
+}
+.loc-address .loc-city{
+  display:block;
+  margin-top:2px;
+  font-weight:500;
+}
+.btn-map{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:12px;
+  padding:9px 18px;
+  background:linear-gradient(135deg, rgba(2,104,179,0.08), rgba(3,203,166,0.08));
+  color:var(--blue);
+  border-radius:10px;
+  font-size:0.8rem;font-weight:600;
+  text-decoration:none;
+  font-family:'Inter',sans-serif;
+  border:1px solid rgba(2,104,179,0.2);
+  transition:all .15s;
+}
+.btn-map:hover{background:linear-gradient(135deg, var(--blue), var(--teal));color:#fff;border-color:transparent;}
+
+/* Connect icons row */
+.connect-row{
+  display:flex;justify-content:space-around;
+  padding:18px 8px 6px;
+  border-top:1px solid var(--border);
+}
+.qbtn{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  text-decoration:none;
+  flex:1;
+}
+.qbtn-circle{
+  width:50px;height:50px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 12px rgba(0,0,0,0.12);
+  transition:transform .15s,box-shadow .15s;
+}
+.qbtn:hover .qbtn-circle{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.18);}
+.qbtn-lbl{font-size:0.66rem;font-weight:600;color:var(--text-soft);letter-spacing:0.02em;}
+.c-call .qbtn-circle{background:linear-gradient(135deg,var(--teal-dark),var(--teal));}
+.c-email .qbtn-circle{background:linear-gradient(135deg,#dc2626,#ef4444);}
+.c-wa .qbtn-circle{background:linear-gradient(135deg,#16a34a,#25D366);}
+
+/* Card footer strip */
+.card-footer{
+  background:linear-gradient(90deg, rgba(2,104,179,0.04), rgba(3,203,166,0.04));
+  border-top:1px solid var(--border);
+  padding:12px 18px;
+  text-align:center;
+  font-size:0.68rem;
+  color:var(--text-soft);
+  letter-spacing:0.05em;
+}
+.card-footer span{
+  background:linear-gradient(90deg, var(--blue), var(--teal));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:700;
+}
+
+@media (max-width:480px){
+  .page{max-width:100%;}
+  .card{margin:0 10px;}
+  .profile-name{font-size:1.4rem;}
+  .logo-box img{width:200px;}
+    
+
+}
+</style>
+</head>
+<body>
+
+<div class="bg-decor">
+  <div class="bg-grid"></div>
+  <div class="bg-dots"></div>
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+  <div class="bg-circle-3"></div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-wrap">
+      <div class="logo-box">
+        <img src="labmate-logo.png"/>
+      </div>
+    </div>  </div>
+
+  <!-- AVATAR -->
+  <div class="avatar-wrap">
+    <div class="avatar-ring">
+      <div class="avatar">
+        <img src="./vishalpawar image.jpg">
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card">
+
+    <div class="profile-head">
+      <div class="profile-name">Vishal P. Pawar</div>
+      <div class="profile-badge">Area Manager</div>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn-save" href="#" onclick="dlVcf();return false;">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v10M7 10l5 5 5-5"/><rect x="3" y="17" width="18" height="4" rx="1.5"/></svg>
+        Save Contact
+      </a>
+      <a class="btn-call" href="tel:+91 9940211451">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.36 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call Now
+      </a>
+    </div>
+
+    <div class="info-list">
+
+      <div class="list-section-title">Contact Details</div>
+      <div class="list-row">
+        <div class="list-label">Mobile</div>
+        <div class="list-value"><a href="tel:+919940211451">+91 9940211451</a></div>
+      </div>
+      <div class="list-row">
+        <div class="list-label">Email</div>
+        <div class="list-value"><a href="mailto:hyd-sales@labmateasia.com">hyd-sales@labmateasia.com</a></div>
+      </div>
+      <div class="list-row">
+        <div class="list-label">Company</div>
+        <div class="list-value">Labmate (Asia) Pvt. Ltd.</div>
+      </div>
+      <div class="list-row">
+        <div class="list-label">Designation</div>
+        <div class="list-value">Area Manager</div>
+      </div>
+      <div class="list-row">
+        <div class="list-label">Department</div>
+        <div class="list-value">Sales</div>
+      </div>
+
+      <div class="list-section-title">Office Location</div>
+      <div class="loc-block">
+        <div class="loc-address">
+        201 Kaveri Queens’s Building, Street No. 3, Tarnaka
+          <span class="loc-city">Hyderabad-500 017. INDIA.</span>
+        </div>
+        <a class="btn-map" href="https://maps.app.goo.gl/sefowagmeiDqo4HfA" target="_blank">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Open in Maps
+        </a>
+      </div>
+
+      <!-- Quick connect -->
+      <div class="connect-row">
+        <a class="qbtn c-call" href="tel:+919940211451">
+          <div class="qbtn-circle">
+            <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.36 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <span class="qbtn-lbl">Call</span>
+        </a>
+        <a class="qbtn c-email" href="mailto:hyd-sales@labmateasia.com">
+          <div class="qbtn-circle">
+            <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </div>
+          <span class="qbtn-lbl">Email</span>
+        </a>
+        <a class="qbtn c-wa" href="https://wa.me/919940211451" target="_blank">
+          <div class="qbtn-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <span class="qbtn-lbl">WhatsApp</span>
+        </a>
+        <a class="qbtn c-wbb" href="https://labmateasia.com/">
+          <div class="qbtn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g data-name="Layer 2"><circle cx="256" cy="256" r="256" fill="#00a1f5" opacity="1" data-original="#00a1f5"></circle><path fill="#ffffff" d="M366 146a155.6 155.6 0 1 0 45.57 110A154.61 154.61 0 0 0 366 146zm-1.77 47.34h-34.89a208.18 208.18 0 0 0-13.89-42.92c-.94-2.06-1.91-4.05-2.91-6a126 126 0 0 1 51.71 48.9zM381.12 256a124.93 124.93 0 0 1-4.21 32.21h-42.8a319.06 319.06 0 0 0 0-64.42h42.8a124.93 124.93 0 0 1 4.21 32.21zm-250.24 0a124.93 124.93 0 0 1 4.21-32.21h42.8a319.06 319.06 0 0 0 0 64.42h-42.8a124.93 124.93 0 0 1-4.21-32.21zm75.85 0a288.4 288.4 0 0 1 1.78-32.21h95a292.32 292.32 0 0 1 0 64.42h-95a288.4 288.4 0 0 1-1.78-32.21zM256 130.88c10.62 0 22.49 12.05 31.77 32.24a170.78 170.78 0 0 1 10.33 30.2h-84.2a170.78 170.78 0 0 1 10.33-30.2c9.28-20.19 21.15-32.24 31.77-32.24zm-56.54 13.53c-1 1.94-2 3.93-2.91 6a208.18 208.18 0 0 0-13.89 42.92h-34.91a126 126 0 0 1 51.71-48.92zm-51.71 174.27h34.91a208.47 208.47 0 0 0 13.89 42.93q1.41 3.08 2.91 6a126 126 0 0 1-51.71-48.93zM256 381.12c-10.62 0-22.49-12.05-31.77-32.24a170.78 170.78 0 0 1-10.33-30.2h84.2a170.78 170.78 0 0 1-10.33 30.2c-9.28 20.19-21.15 32.24-31.77 32.24zm56.54-13.53c1-1.94 2-3.93 2.91-6a208.37 208.37 0 0 0 13.89-42.92h34.91a126 126 0 0 1-51.71 48.92z" opacity="1" data-original="#ffffff"></path></g></g></svg>
+          </div>
+          <span class="qbtn-lbl">Website</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="card-footer"><span>Labmate (Asia) Pvt. Ltd.</span></div>
+  </div>
+
+</div>
+
+<script>
+function dlVcf(){
+  const v=['Name: Vishal P. Pawar','Company : Labmate (Asia) Pvt. Ltd.','Designation: Area Manager','Mobile: +91 9940211451','Email: hyd-sales@labmateasia.com','Address: 201 Kaveri Queens’s Building, Street No. 3, Tarnaka,  Hyderabad-500 017. INDIA.','Website: https://labmateasia.com'].join('\r\n');
+  const b=new Blob([v],{type:'text/vcard;charset=utf-8'});
+  const u=URL.createObjectURL(b);
+  const a=document.createElement('a');
+  a.href=u;a.download='Vishal Pawar_Labmate(Asia).vcf';a.click();
+  URL.revokeObjectURL(u);
+}
+</script>
+</body>
+</html>
+
